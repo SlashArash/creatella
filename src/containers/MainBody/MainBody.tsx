@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 import Face from "types/Face";
 import { host, requestOptions } from "utils/constants";
@@ -21,10 +21,11 @@ const MainBody = () => {
     setPage(page + 1);
     setIsLoading(false);
   };
+  const loadFacesCallback = useCallback(loadFaces, []);
 
   useEffect(() => {
-    loadFaces();
-  }, []);
+    loadFacesCallback();
+  }, [loadFacesCallback]);
 
   return (
     <Wrapper>
