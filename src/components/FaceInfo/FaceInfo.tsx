@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 
+import { formatPrice } from "utils/functions";
 import { Container, Legend, Price, Section } from "./styles";
 
 type Props = {
@@ -12,7 +13,7 @@ const FaceInfo: React.FC<Props> = ({ price, size }) => {
     <Container>
       <Price>
         <Legend>Price</Legend>
-        <p>{price}</p>
+        <p>{formatPrice(price)}</p>
       </Price>
       <Section>
         <Legend>Size</Legend>
