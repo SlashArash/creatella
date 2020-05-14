@@ -7,6 +7,7 @@ export const Wrapper = styled("main")`
   max-width: 1024px;
   margin: 0 auto;
   padding: 1rem;
+  box-sizing: content-box;
 `;
 
 export const Settings = styled("div")`
