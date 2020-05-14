@@ -3,7 +3,7 @@ import styled from "styled-components";
 import colors from "utils/style/colors";
 import { borderRadius } from "utils/style/common";
 
-export const Face = styled("p")`
+export const FaceIcon = styled("p")`
   font-size: 1.8rem;
   transition: color 0.3s ease;
 `;
@@ -15,7 +15,7 @@ export const Container = styled("div")`
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  :hover ${Face} {
+  :hover ${FaceIcon} {
     color: ${colors.red};
   }
 `;

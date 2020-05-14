@@ -13,22 +13,19 @@ export const Container = styled("div")`
 export const Legend = styled("span")`
   color: ${colors.lightGray};
   font-size: 0.7rem;
+  margin-right: 0.8rem;
 `;
 
 export const Section = styled("span")`
   padding: 0.5rem 1rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  & > p {
-    margin-top: 5px;
-  }
+  justify-content: center;
+  flex: 1;
 `;
 
 export const Price = styled(Section)`
-  border-left: 1px solid ${colors.whitesmoke};
   border-right: 1px solid ${colors.whitesmoke};
-  flex: 1;
   & > p {
     color: ${colors.green};
     font-weight: bold;

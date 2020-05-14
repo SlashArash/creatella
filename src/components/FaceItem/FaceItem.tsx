@@ -1,18 +1,23 @@
-import React from "react";
+import React, { memo } from "react";
 
-import { Container, Date, Face, Head } from "./styles";
+import Face from "types/Face";
+import { Container, Date, FaceIcon, Head } from "./styles";
 import FaceInfo from "components/FaceInfo";
 
-const FaceItem = () => {
+type Props = {
+  face: Face;
+};
+
+const FaceItem: React.FC<Props> = ({ face }) => {
   return (
     <Container>
       <Head>
         <Date>3 days ago</Date>
-        <Face>¯\_(ツ)_/¯</Face>
+        <FaceIcon>{face.face}</FaceIcon>
       </Head>
-      <FaceInfo />
+      <FaceInfo price={face.price} size={face.size} />
     </Container>
   );
 };
 
-export default FaceItem;
+export default memo(FaceItem);
