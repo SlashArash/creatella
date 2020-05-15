@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, Fragment } from "react";
 
 import Face from "types/Face";
 import { host } from "utils/constants";
@@ -32,7 +32,7 @@ const getAdvBanner = (itemIndex: number) => {
   return `${host}ads/?r=${advID}`;
 };
 
-const ListItem: React.FC<Props> = ({ faces, isLoading }) => {
+const ListItems: React.FC<Props> = ({ faces, isLoading }) => {
   return (
     <Wrapper>
       <List>
@@ -40,12 +40,12 @@ const ListItem: React.FC<Props> = ({ faces, isLoading }) => {
           if ((index + 1) % 20 === 0) {
             const imageSrc = getAdvBanner(index + 1);
             return (
-              <>
+              <Fragment key={face.id}>
                 <FaceItem key={face.id} face={face} />
                 <Banner>
                   <img src={imageSrc} alt="advertisement" />
                 </Banner>
-              </>
+              </Fragment>
             );
           }
           return <FaceItem key={face.id} face={face} />;
@@ -60,4 +60,4 @@ const ListItem: React.FC<Props> = ({ faces, isLoading }) => {
   );
 };
 
-export default memo(ListItem);
+export default memo(ListItems);
