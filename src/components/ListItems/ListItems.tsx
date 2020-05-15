@@ -2,11 +2,13 @@ import React, { memo } from "react";
 
 import Face from "types/Face";
 import { host } from "utils/constants";
-import { Wrapper, Banner } from "./styles";
+import { Banner, List, Loading, Wrapper } from "./styles";
 import FaceItem from "components/FaceItem";
+import BubbleLoading from "components/BubbleLoading";
 
 type Props = {
   faces: Face[];
+  isLoading: boolean;
 };
 
 const advIDs: number[] = [];
@@ -30,23 +32,30 @@ const getAdvBanner = (itemIndex: number) => {
   return `${host}ads/?r=${advID}`;
 };
 
-const ListItem: React.FC<Props> = ({ faces }) => {
+const ListItem: React.FC<Props> = ({ faces, isLoading }) => {
   return (
     <Wrapper>
-      {faces.map((face, index) => {
-        if ((index + 1) % 20 === 0) {
-          const imageSrc = getAdvBanner(index + 1);
-          return (
-            <>
-              <FaceItem key={face.id} face={face} />
-              <Banner>
-                <img src={imageSrc} alt="advertisement" />
-              </Banner>
-            </>
-          );
-        }
-        return <FaceItem key={face.id} face={face} />;
-      })}
+      <List>
+        {faces.map((face, index) => {
+          if ((index + 1) % 20 === 0) {
+            const imageSrc = getAdvBanner(index + 1);
+            return (
+              <>
+                <FaceItem key={face.id} face={face} />
+                <Banner>
+                  <img src={imageSrc} alt="advertisement" />
+                </Banner>
+              </>
+            );
+          }
+          return <FaceItem key={face.id} face={face} />;
+        })}
+      </List>
+      {isLoading && (
+        <Loading>
+          <BubbleLoading />
+        </Loading>
+      )}
     </Wrapper>
   );
 };

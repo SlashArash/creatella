@@ -47,6 +47,7 @@ const MainBody = () => {
         Math.ceil(scrollTop + clientHeight) >= scrollHeight;
 
       if (scrolledToBottom && !isLoading && !isAllDataFetched) {
+        setIsLoading(true);
         await loadFaces();
       }
     };
@@ -60,7 +61,7 @@ const MainBody = () => {
         <span>Sort By</span>
         <span>Showing {faces.length} results</span>
       </Settings>
-      <ListItems faces={faces} />
+      <ListItems faces={faces} isLoading={isLoading} />
       {isAllDataFetched && (
         <EndBadge>
           <span>~ end of catalogue ~</span>

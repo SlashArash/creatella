@@ -5,7 +5,7 @@ import colors from "utils/style/colors";
 
 export const Wrapper = styled("main")`
   max-width: 1024px;
-  margin: 0 auto;
+  margin: 0 auto 3rem;
   padding: 1rem;
   box-sizing: content-box;
 `;
