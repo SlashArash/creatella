@@ -47,9 +47,4 @@ export const GlobalStyled = createGlobalStyle`
   iframe >  html {
     direction: rtl !important
   }
-
-  img {
-    border-radius: 0 !important;
-    box-shadow: none !important;
-  }
 `;

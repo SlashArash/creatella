@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useCallback, useRef } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 import Face from "types/Face";
 import { host, requestOptions } from "utils/constants";
 import { Settings, Wrapper } from "./styles";
-import ListItem from "components/ListItem";
+import ListItems from "components/ListItems";
 
 type sortBy = "id" | "price" | "size";
 
@@ -60,7 +60,7 @@ const MainBody = () => {
         <span>Sort By</span>
         <span>Showing {faces.length} results</span>
       </Settings>
-      <ListItem faces={faces} />
+      <ListItems faces={faces} />
     </Wrapper>
   );
 };
