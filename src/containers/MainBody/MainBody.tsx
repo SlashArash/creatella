@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 
 import Face from "types/Face";
 import { host, requestOptions } from "utils/constants";
@@ -26,11 +26,19 @@ const MainBody = () => {
     }
   };
 
-  const loadFacesCallback = useCallback(loadFaces, []);
+  const onChangeSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value as sortBy;
+    setSortBy(value);
+    setIsLoading(true);
+    setFaces([]);
+    setPage(1);
+  };
 
   useEffect(() => {
-    loadFacesCallback();
-  }, [loadFacesCallback]);
+    if (isLoading && faces.length === 0) {
+      loadFaces();
+    }
+  }, [loadFaces, isLoading, faces]);
 
   useEffect(() => {
     const loadOnScroll = async () => {
@@ -58,7 +66,14 @@ const MainBody = () => {
   return (
     <Wrapper>
       <Settings>
-        <span>Sort By</span>
+        <span>
+          <label htmlFor="sort">Sort By </label>
+          <select id="sort" value={sortBy} onChange={onChangeSortBy}>
+            <option value="id">id</option>
+            <option value="price">price</option>
+            <option value="size">size</option>
+          </select>
+        </span>
         <span>Showing {faces.length} results</span>
       </Settings>
       <ListItems faces={faces} isLoading={isLoading} />
