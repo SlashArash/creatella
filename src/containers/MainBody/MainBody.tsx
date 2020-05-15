@@ -51,8 +51,7 @@ const MainBody = () => {
       const clientHeight =
         (document.documentElement && document.documentElement.clientHeight) ||
         window.innerHeight;
-      const scrolledToBottom =
-        Math.ceil(scrollTop + clientHeight) >= scrollHeight;
+      const scrolledToBottom = scrollTop + clientHeight >= scrollHeight - 300;
 
       if (scrolledToBottom && !isLoading && !isAllDataFetched) {
         setIsLoading(true);
