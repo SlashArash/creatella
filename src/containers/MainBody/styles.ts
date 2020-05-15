@@ -18,3 +18,17 @@ export const Settings = styled("div")`
   align-items: center;
   padding: 1rem;
 `;
+
+export const EndBadge = styled("div")`
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid ${colors.black};
+  line-height: 0.1em;
+  margin: 5rem 0 3rem;
+  & > span {
+    background: ${colors.red};
+    color: #ffffff;
+    border-radius: ${borderRadius};
+    padding: 0.5rem;
+  }
+`;

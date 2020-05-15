@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 
 import Face from "types/Face";
 import { host, requestOptions } from "utils/constants";
-import { Settings, Wrapper } from "./styles";
+import { EndBadge, Settings, Wrapper } from "./styles";
 import ListItems from "components/ListItems";
 
 type sortBy = "id" | "price" | "size";
@@ -61,6 +61,11 @@ const MainBody = () => {
         <span>Showing {faces.length} results</span>
       </Settings>
       <ListItems faces={faces} />
+      {isAllDataFetched && (
+        <EndBadge>
+          <span>~ end of catalogue ~</span>
+        </EndBadge>
+      )}
     </Wrapper>
   );
 };
