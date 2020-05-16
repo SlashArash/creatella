@@ -2,7 +2,7 @@ import React, { memo } from "react";
 
 import { Dot, Dots } from "./styles";
 
-const BubbleLoading: React.FC = () => {
+const BubbleLoading = () => {
   return (
     <Dots>
       <Dot delay={0} />

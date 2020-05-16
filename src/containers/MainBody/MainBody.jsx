@@ -1,26 +1,23 @@
 import React, { useEffect, useState, useCallback } from "react";
 
-import Face from "types/Face";
 import { host, requestOptions } from "utils/constants";
 import { EndBadge, Settings, Wrapper } from "./styles";
 import ListItems from "components/ListItems";
 
-type sortBy = "id" | "price" | "size";
-
 const MainBody = () => {
-  const [sortBy, setSortBy] = useState<sortBy>("price");
-  const [nextPage, setNextPage] = useState<number>(2);
-  const [faces, setFaces] = useState<Face[]>([]);
-  const [nextFaces, setNextFaces] = useState<Face[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isAllDataFetched, setIsAllDataFetched] = useState<boolean>(false);
+  const [sortBy, setSortBy] = useState("price");
+  const [nextPage, setNextPage] = useState(2);
+  const [faces, setFaces] = useState([]);
+  const [nextFaces, setNextFaces] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAllDataFetched, setIsAllDataFetched] = useState(false);
 
-  const loadFaces = async (first?: boolean) => {
+  const loadFaces = async (first) => {
     const productsURL = `${host}products?_sort=${sortBy}&_page=${
       first ? 1 : nextPage
     }&_limit=15`;
     const response = await fetch(productsURL, requestOptions);
-    const newFaces: Face[] = await response.json();
+    const newFaces = await response.json();
 
     if (newFaces.length === 0) {
       setIsAllDataFetched(true);
@@ -39,8 +36,8 @@ const MainBody = () => {
 
   const loadFacesCallback = useCallback(loadFaces, [faces, nextPage, sortBy]);
 
-  const onChangeSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value as sortBy;
+  const onChangeSortBy = (e) => {
+    const value = e.target.value;
     setSortBy(value);
     setIsLoading(true);
     setFaces([]);

@@ -3,12 +3,7 @@ import React, { memo } from "react";
 import { formatPrice } from "utils/functions";
 import { Container, Legend, Price, Section } from "./styles";
 
-type Props = {
-  price: number;
-  size: number;
-};
-
-const FaceInfo: React.FC<Props> = ({ price, size }) => {
+const FaceInfo = ({ price, size }) => {
   return (
     <Container>
       <Price>

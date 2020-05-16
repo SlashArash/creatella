@@ -1,19 +1,13 @@
 import React, { memo, Fragment } from "react";
 
-import Face from "types/Face";
 import { host } from "utils/constants";
 import { Banner, List, Loading, Wrapper } from "./styles";
 import FaceItem from "components/FaceItem";
 import BubbleLoading from "components/BubbleLoading";
 
-type Props = {
-  faces: Face[];
-  isLoading: boolean;
-};
+const advIDs = [];
 
-const advIDs: number[] = [];
-
-const generateUniqueID: any = (advIndex: number) => {
+const generateUniqueID = (advIndex) => {
   if (advIDs[advIndex] !== undefined) {
     return advIDs[advIndex];
   }
@@ -26,13 +20,13 @@ const generateUniqueID: any = (advIndex: number) => {
   }
 };
 
-const getAdvBanner = (itemIndex: number) => {
+const getAdvBanner = (itemIndex) => {
   const advIndex = itemIndex / 20 - 1;
   const advID = generateUniqueID(advIndex);
   return `${host}ads/?r=${advID}`;
 };
 
-const ListItems: React.FC<Props> = ({ faces, isLoading }) => {
+const ListItems = ({ faces, isLoading }) => {
   return (
     <Wrapper>
       <List>

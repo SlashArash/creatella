@@ -1,15 +1,10 @@
 import React, { memo } from "react";
 
-import Face from "types/Face";
 import { formatDate } from "utils/date";
 import { Container, Date, FaceIcon, Head } from "./styles";
 import FaceInfo from "components/FaceInfo";
 
-type Props = {
-  face: Face;
-};
-
-const FaceItem: React.FC<Props> = ({ face }) => {
+const FaceItem = ({ face }) => {
   return (
     <Container>
       <Head>

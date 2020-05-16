@@ -8,11 +8,7 @@ const dotPulse = keyframes`
   100% { transform: scale(0); }
 `;
 
-type IDotsProps = {
-  delay: number;
-};
-
-export const Dot = styled("div")<IDotsProps>`
+export const Dot = styled("div")`
   background: ${colors.red};
   border-radius: 100%;
   width: 14px;

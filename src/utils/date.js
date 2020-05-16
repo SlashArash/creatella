@@ -1,4 +1,4 @@
-export const relativeDate = (date: string) => {
+export const relativeDate = (date) => {
   const second = 1000;
   const minute = 60 * second;
   const hour = minute * 60;
@@ -26,7 +26,7 @@ export const relativeDate = (date: string) => {
   return new Error("Invalid date");
 };
 
-export const formatDate = (date: string) => {
+export const formatDate = (date) => {
   const week = 604800000;
   const currentDate = new Date();
   const targetDate = new Date(date);

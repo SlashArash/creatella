@@ -3,7 +3,7 @@ import React from "react";
 import { Container, Description, Logo } from "./styles";
 import logo from "assets/images/logo.webp";
 
-const Header: React.FC = () => {
+const Header = () => {
   return (
     <Container>
       <Logo src={logo} alt="Product Grids" />
