@@ -8,37 +8,48 @@ import ListItems from "components/ListItems";
 type sortBy = "id" | "price" | "size";
 
 const MainBody = () => {
-  const [sortBy, setSortBy] = useState<sortBy>("id");
-  const [page, setPage] = useState<number>(1);
+  const [sortBy, setSortBy] = useState<sortBy>("price");
+  const [nextPage, setNextPage] = useState<number>(2);
   const [faces, setFaces] = useState<Face[]>([]);
+  const [nextFaces, setNextFaces] = useState<Face[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isAllDataFetched, setIsAllDataFetched] = useState<boolean>(false);
 
-  const loadFaces = async () => {
-    const productsURL = `${host}products?_sort=${sortBy}&_page=${page}&_limit=15`;
+  const loadFaces = async (first?: boolean) => {
+    const productsURL = `${host}products?_sort=${sortBy}&_page=${
+      first ? 1 : nextPage
+    }&_limit=15`;
     const response = await fetch(productsURL, requestOptions);
     const newFaces: Face[] = await response.json();
-    setFaces([...faces, ...newFaces]);
-    setPage(page + 1);
-    setIsLoading(false);
+
     if (newFaces.length === 0) {
       setIsAllDataFetched(true);
     }
+
+    if (first) {
+      setFaces(newFaces);
+      setIsLoading(false);
+      await loadFaces();
+    } else {
+      setNextFaces(newFaces);
+      setIsLoading(false);
+      setNextPage(nextPage + 1);
+    }
   };
 
-  const loadFacesCallback = useCallback(loadFaces, [faces, page, sortBy]);
+  const loadFacesCallback = useCallback(loadFaces, [faces, nextPage, sortBy]);
 
   const onChangeSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as sortBy;
     setSortBy(value);
     setIsLoading(true);
     setFaces([]);
-    setPage(1);
+    setNextPage(2);
   };
 
   useEffect(() => {
     if (isLoading && faces.length === 0) {
-      loadFacesCallback();
+      loadFacesCallback(true);
     }
   }, [loadFacesCallback, isLoading, faces]);
 
@@ -53,10 +64,11 @@ const MainBody = () => {
       const clientHeight =
         (document.documentElement && document.documentElement.clientHeight) ||
         window.innerHeight;
-      const scrolledToBottom = scrollTop + clientHeight >= scrollHeight - 300;
+      const scrolledToBottom = scrollTop + clientHeight >= scrollHeight;
 
       if (scrolledToBottom && !isLoading && !isAllDataFetched) {
         setIsLoading(true);
+        setFaces([...faces, ...nextFaces]);
         await loadFacesCallback();
       }
     };
