@@ -29,7 +29,6 @@ export const GlobalStyled = createGlobalStyle`
     height: 100%;
     margin: 0 !important;
     padding: 0 !important;
-    user-select: none;
     color: ${colors.black}
   }
   ul {
