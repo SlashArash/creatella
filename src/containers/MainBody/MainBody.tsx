@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 import Face from "types/Face";
 import { host, requestOptions } from "utils/constants";
@@ -26,6 +26,8 @@ const MainBody = () => {
     }
   };
 
+  const loadFacesCallback = useCallback(loadFaces, [faces, page, sortBy]);
+
   const onChangeSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value as sortBy;
     setSortBy(value);
@@ -36,9 +38,9 @@ const MainBody = () => {
 
   useEffect(() => {
     if (isLoading && faces.length === 0) {
-      loadFaces();
+      loadFacesCallback();
     }
-  }, [loadFaces, isLoading, faces]);
+  }, [loadFacesCallback, isLoading, faces]);
 
   useEffect(() => {
     const loadOnScroll = async () => {
@@ -55,12 +57,12 @@ const MainBody = () => {
 
       if (scrolledToBottom && !isLoading && !isAllDataFetched) {
         setIsLoading(true);
-        await loadFaces();
+        await loadFacesCallback();
       }
     };
     window.addEventListener("scroll", loadOnScroll);
     return () => window.removeEventListener("scroll", loadOnScroll);
-  }, [loadFaces, isLoading, isAllDataFetched]);
+  }, [loadFacesCallback, isLoading, isAllDataFetched]);
 
   return (
     <Wrapper>
